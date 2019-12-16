@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 // #region styled components
 const StyledMenuItem = styled.div`
@@ -71,8 +72,11 @@ const StyledMenuItem = styled.div`
 `;
 // #endregion
 
-const MenuItem = ({ title, imageUrl, size }) => (
-  <StyledMenuItem className={`${size}`}>
+const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => (
+  <StyledMenuItem
+    className={`${size}`}
+    onClick={() => history.push(`${match.url}${linkUrl}`)}
+  >
     <div
       className='background-image'
       style={{ backgroundImage: `url(${imageUrl})` }}
@@ -84,4 +88,4 @@ const MenuItem = ({ title, imageUrl, size }) => (
   </StyledMenuItem>
 );
 
-export default MenuItem;
+export default withRouter(MenuItem);

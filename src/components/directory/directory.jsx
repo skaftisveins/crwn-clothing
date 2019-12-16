@@ -50,8 +50,8 @@ const Directory = () => {
 
   return (
     <StyledDirectoryMenu>
-      {state.sections.map(({ id, title, imageUrl, size }) => (
-        <MenuItem key={id} title={title} imageUrl={imageUrl} size={size} />
+      {state.sections.map(({ id, ...state }) => (
+        <MenuItem key={id} {...state} />
       ))}
     </StyledDirectoryMenu>
   );

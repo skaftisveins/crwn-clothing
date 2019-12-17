@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import SHOP_DATA from './shop.data';
+import SHOP_DATA from './Shop.data';
 
-import CollectionPreview from '../../components/collection-preview/collection-preview';
+import CollectionPreview from '../../components/collection-preview/Collection-preview';
 
 const ShopPage = () => {
   const [state] = useState({

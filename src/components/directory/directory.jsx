@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import MenuItem from '../menu-item/menu-item';
+import MenuItem from '../menu-item/Menu-item';
 
 const StyledDirectoryMenu = styled.div`
   width: 100%;

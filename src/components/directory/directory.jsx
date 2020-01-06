@@ -16,7 +16,7 @@ const Directory = () => {
       {
         id: 1,
         title: 'hats',
-        imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
+        imageUrl: 'https://i.ibb.co/5rSV0Jq/19.jpg',
         linkUrl: 'shop/hats'
       },
       {

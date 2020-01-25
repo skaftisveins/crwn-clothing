@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Directory from '../../components/directory/Directory';
+import Directory from '../../components/directory/directory';
 
 // #region Styled Compontents
 const StyledHomePage = styled.div`

@@ -6,14 +6,12 @@ import { setCurrentUser } from './redux/user/userActions';
 import { selectCurrentUser } from './redux/user/userSelector';
 import { createStructuredSelector } from 'reselect';
 
-import ShopPage from './pages/shop/Shop';
 import HomePage from './pages/homepage/Homepage';
+import ShopPage from './pages/shop/Shop';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/Sign-in-and-sign-up';
 import CheckoutPage from './pages/checkout/Checkout';
 
 import Header from './components/header/Header';
-
-
 
 import './App.css';
 class App extends React.Component {

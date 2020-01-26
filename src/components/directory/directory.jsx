@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect';
 import { selectDirectorySections } from '../../redux/directory/directorySelector';
 import styled from 'styled-components';
 
-import MenuItem from '../menu-item/Menu-item';
+import MenuItem from '../menu-item/menu-item';
 
 const StyledDirectoryMenu = styled.div`
   width: 100%;

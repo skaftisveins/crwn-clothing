@@ -2,14 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import CheckoutItem from '../../components/checkout-item/Checkout-item';
+import CheckoutItem from '../../components/checkout-item/checkout-item';
 
 import {
   selectCartItems,
   selectCartTotal
 } from '../../redux/cart/cartSelectors';
-import './Checkout.styles.scss';
-import StripeButton from '../../components/stripe-button/Stripe-button';
+import './checkout.styles.scss';
+import StripeButton from '../../components/stripe-button/stripe-button';
 
 const CheckoutPage = ({ cartItems, total }) => {
   return (

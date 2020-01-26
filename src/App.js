@@ -8,10 +8,10 @@ import { createStructuredSelector } from 'reselect';
 
 import HomePage from './pages/homepage/homepage';
 import ShopPage from './pages/shop/shop';
-import SignInAndSignUpPage from './pages/sign-in-and-sign-up/Sign-in-and-sign-up';
-import CheckoutPage from './pages/checkout/Checkout';
+import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up';
+import CheckoutPage from './pages/checkout/checkout';
 
-import Header from './components/header/Header';
+import Header from './components/header/header';
 
 import './App.css';
 class App extends React.Component {

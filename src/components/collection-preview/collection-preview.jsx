@@ -1,36 +1,24 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import CollectionItem from '../collection-item/collection-item';
-
-const StyledCollectionPreview = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 30px;
-
-  .title {
-    font-size: 28px;
-    margin-bottom: 25px;
-  }
-
-  .preview {
-    display: flex;
-    justify-content: space-between;
-  }
-`;
+import {
+  CollectionPreviewContainer,
+  TitleContainer,
+  PreviewContainer
+} from './collection-preview.styles';
 
 const CollectionPreview = ({ title, items }) => {
   return (
-    <StyledCollectionPreview>
-      <h1 className='title'>{title.toUpperCase()}</h1>
-      <div className='preview'>
+    <CollectionPreviewContainer>
+      <TitleContainer>{title.toUpperCase()}</TitleContainer>
+      <PreviewContainer>
         {items
           .filter((item, index) => index < 4)
           .map(item => (
             <CollectionItem key={item.id} item={item} />
           ))}
-      </div>
-    </StyledCollectionPreview>
+      </PreviewContainer>
+    </CollectionPreviewContainer>
   );
 };
 

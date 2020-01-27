@@ -2,24 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectDirectorySections } from '../../redux/directory/directorySelector';
-import styled from 'styled-components';
 
 import MenuItem from '../menu-item/menu-item';
-
-const StyledDirectoryMenu = styled.div`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
+import { DirectoryMenuContainer } from './directory.styles';
 
 const Directory = ({ sections }) => {
   return (
-    <StyledDirectoryMenu>
+    <DirectoryMenuContainer>
       {sections.map(({ id, ...state }) => (
         <MenuItem key={id} {...state} />
       ))}
-    </StyledDirectoryMenu>
+    </DirectoryMenuContainer>
   );
 };
 

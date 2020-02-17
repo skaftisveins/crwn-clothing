@@ -7,11 +7,16 @@ export const CheckoutPageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 50px auto 0;
+
+  button {
+    margin-left: auto;
+    margin-top: 50px;
+  }
 `;
 
 export const CheckoutHeaderContainer = styled.div`
   width: 100%;
-  padding: 10px 0;
+  height: 40px;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid darkgrey;

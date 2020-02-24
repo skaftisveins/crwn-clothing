@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
-import { setCurrentUser } from './redux/user/userActions';
-import { selectCurrentUser } from './redux/user/userSelector';
-import { createStructuredSelector } from 'reselect';
+
+import CurrentUserContext from './contexts/current-user/currentUser';
 
 import HomePage from './pages/homepage/homepage';
 import ShopPage from './pages/shop/shop';
@@ -14,29 +12,36 @@ import CheckoutPage from './pages/checkout/checkout';
 import Header from './components/header/header';
 
 import './App.css';
-const App = ({ setCurrentUser, currentUser }) => {
+
+const App = () => {
+  const [state, setState] = useState({ currentUser: null });
+
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot(snapShot => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data()
+          setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data()
+            }
           });
         });
       }
-      setCurrentUser(userAuth);
+      setState({ currentUser: userAuth });
       return () => {
         unsubscribeFromAuth();
       };
     });
-  }, [setCurrentUser]);
+  }, []);
 
   return (
     <>
-      <Header />
+      <CurrentUserContext.Provider value={state.currentUser}>
+        <Header />
+      </CurrentUserContext.Provider>
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path='/shop' component={ShopPage} />
@@ -45,7 +50,7 @@ const App = ({ setCurrentUser, currentUser }) => {
           exact
           path='/signin'
           render={() =>
-            currentUser ? <Redirect to='/' /> : <SignInAndSignUpPage />
+            state.currentUser ? <Redirect to='/' /> : <SignInAndSignUpPage />
           }
         />
       </Switch>
@@ -53,12 +58,4 @@ const App = ({ setCurrentUser, currentUser }) => {
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
-});
-
-const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;

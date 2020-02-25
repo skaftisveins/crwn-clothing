@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
@@ -12,12 +12,13 @@ import CheckoutPage from './pages/checkout/checkout';
 import Header from './components/header/header';
 
 import './App.css';
+class App extends React.Component {
+  unsubscribeFromAuth = null;
 
-const App = () => {
-  const [state, setState] = useState({ currentUser: null });
+  componentDidMount() {
+    const { setCurrentUser } = this.props;
 
-  useEffect(() => {
-    const unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
 
@@ -30,32 +31,38 @@ const App = () => {
           });
         });
       }
-      setState({ currentUser: userAuth });
-      return () => {
-        unsubscribeFromAuth();
-      };
-    });
-  }, []);
 
-  return (
-    <>
-      <CurrentUserContext.Provider value={state.currentUser}>
+      setCurrentUser(userAuth);
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
+  }
+
+  render() {
+    return (
+      <>
         <Header />
-      </CurrentUserContext.Provider>
-      <Switch>
-        <Route exact path='/' component={HomePage} />
-        <Route path='/shop' component={ShopPage} />
-        <Route exact path='/checkout' component={CheckoutPage} />
-        <Route
-          exact
-          path='/signin'
-          render={() =>
-            state.currentUser ? <Redirect to='/' /> : <SignInAndSignUpPage />
-          }
-        />
-      </Switch>
-    </>
-  );
-};
+        <Switch>
+          <Route exact path='/' component={HomePage} />
+          <Route path='/shop' component={ShopPage} />
+          <Route exact path='/checkout' component={CheckoutPage} />
+          <Route
+            exact
+            path='/signin'
+            render={() =>
+              this.props.currentUser ? (
+                <Redirect to='/' />
+              ) : (
+                <SignInAndSignUpPage />
+              )
+            }
+          />
+        </Switch>
+      </>
+    );
+  }
+}
 
 export default App;
